@@ -1,8 +1,6 @@
 import Byte
-import Byte_Standard_Library_Integration
 import Coder
-import Coder_Standard_Library_Integration
-import Cursor_Standard_Library_Integration
+import Cursor
 import RFC_2045
 import RFC_2046
 import RFC_2046_Coder

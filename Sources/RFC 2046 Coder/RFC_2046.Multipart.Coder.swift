@@ -1,10 +1,9 @@
 public import Byte
 public import Coder
 public import Cursor
-public import Cursor_Standard_Library_Integration
 public import RFC_2046
-import Binary_Serializable
-import Byte_Standard_Library_Integration
+import Binary
+import Byte
 import Parser
 import Serializer
 

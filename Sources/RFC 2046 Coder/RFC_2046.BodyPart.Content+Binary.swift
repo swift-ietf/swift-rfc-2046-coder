@@ -1,8 +1,8 @@
-public import ASCII
-public import Binary_Serializable
+public import Binary
 public import Byte
 public import RFC_2046
-import Byte_Standard_Library_Integration
+import ASCII
+import Byte
 import RFC_2045
 import RFC_4648
 

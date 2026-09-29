@@ -1,7 +1,7 @@
-public import ASCII
 public import Byte
 public import RFC_2046
-import Byte_Standard_Library_Integration
+import ASCII
+import Byte
 
 extension RFC_2046 {
 

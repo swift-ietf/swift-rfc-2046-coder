@@ -1,9 +1,10 @@
-public import ASCII
-public import Binary_Serializable
+public import Binary
 public import Byte
 public import RFC_2046
-import Byte_Standard_Library_Integration
+import ASCII
+import Byte
 import RFC_2045
+import RFC_2045_Coder
 
 extension RFC_2046.Multipart: @retroactive Binary.Serializable {
 
@@ -109,7 +110,7 @@ extension RFC_2046.Multipart {
             )
         else {
             throw Error.invalidBodyPart(
-                "content is not valid \(headers.contentTransferEncoding?.rawValue ?? "raw")"
+                "content is not valid \(headers.contentTransferEncoding.map { String(decoding: [Byte]($0), as: UTF8.self) } ?? "raw")"
             )
         }
         return RFC_2046.BodyPart(headers: headers, content: RFC_2046.BodyPart.Content(decoded))

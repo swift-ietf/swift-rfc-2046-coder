@@ -17,21 +17,12 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/swift-atoms/swift-ascii.git", branch: "main"),
+        .package(url: "https://github.com/swift-atoms/swift-ascii.git", branch: "main", traits: ["Parser", "Serializer"]),
         .package(url: "https://github.com/swift-atoms/swift-byte.git", branch: "main"),
         .package(url: "https://github.com/swift-atoms/swift-coder.git", branch: "main"),
         .package(url: "https://github.com/swift-atoms/swift-cursor.git", branch: "main"),
         .package(url: "https://github.com/swift-atoms/swift-parser.git", branch: "main"),
         .package(url: "https://github.com/swift-atoms/swift-serializer.git", branch: "main"),
-        .package(url: "https://github.com/swift-molecules/swift-ascii-parser.git", branch: "main"),
-        .package(
-            url: "https://github.com/swift-molecules/swift-ascii-serializer.git",
-            branch: "main"
-        ),
-        .package(
-            url: "https://github.com/swift-molecules/swift-binary-serializer.git",
-            branch: "main"
-        ),
         .package(url: "https://github.com/swift-ietf/swift-rfc-2045.git", branch: "main"),
         .package(url: "https://github.com/swift-ietf/swift-rfc-2045-coder.git", branch: "main"),
         .package(url: "https://github.com/swift-ietf/swift-rfc-2046.git", branch: "main"),
@@ -39,20 +30,18 @@ let package = Package(
         .package(url: "https://github.com/swift-ietf/swift-rfc-2183-coder.git", branch: "main"),
         .package(url: "https://github.com/swift-ietf/swift-rfc-4648.git", branch: "main"),
         .package(url: "https://github.com/swift-ietf/swift-rfc-5322.git", branch: "main"),
+        .package(url: "https://github.com/swift-atoms/swift-binary.git", branch: "main", traits: ["Serializer"]),
     ],
     targets: [
         .target(
             name: "RFC 2046 Coder",
             dependencies: [
                 .product(name: "ASCII", package: "swift-ascii"),
-                .product(name: "ASCII Serializer", package: "swift-ascii-serializer"),
-                .product(name: "Parseable ASCII", package: "swift-ascii-parser"),
-                .product(name: "Binary Serializable", package: "swift-binary-serializer"),
                 .product(name: "Byte", package: "swift-byte"),
-                .product(name: "Byte Standard Library Integration", package: "swift-byte"),
+                .product(name: "Byte", package: "swift-byte"),
                 .product(name: "Coder", package: "swift-coder"),
                 .product(name: "Cursor", package: "swift-cursor"),
-                .product(name: "Cursor Standard Library Integration", package: "swift-cursor"),
+                .product(name: "Cursor", package: "swift-cursor"),
                 .product(name: "Parser", package: "swift-parser"),
                 .product(name: "Serializer", package: "swift-serializer"),
                 .product(name: "RFC 2045", package: "swift-rfc-2045"),
@@ -62,6 +51,7 @@ let package = Package(
                 .product(name: "RFC 2183 Coder", package: "swift-rfc-2183-coder"),
                 .product(name: "RFC 4648", package: "swift-rfc-4648"),
                 .product(name: "RFC 5322", package: "swift-rfc-5322"),
+                .product(name: "Binary", package: "swift-binary"),
             ]
         ),
         .testTarget(
@@ -69,18 +59,16 @@ let package = Package(
             dependencies: [
                 .target(name: "RFC 2046 Coder"),
                 .product(name: "ASCII", package: "swift-ascii"),
-                .product(name: "ASCII Serializer", package: "swift-ascii-serializer"),
-                .product(name: "Parseable ASCII", package: "swift-ascii-parser"),
-                .product(name: "Binary Serializable", package: "swift-binary-serializer"),
                 .product(name: "Byte", package: "swift-byte"),
-                .product(name: "Byte Standard Library Integration", package: "swift-byte"),
+                .product(name: "Byte", package: "swift-byte"),
                 .product(name: "Coder", package: "swift-coder"),
-                .product(name: "Coder Standard Library Integration", package: "swift-coder"),
-                .product(name: "Cursor Standard Library Integration", package: "swift-cursor"),
+                .product(name: "Coder", package: "swift-coder"),
+                .product(name: "Cursor", package: "swift-cursor"),
                 .product(name: "RFC 2045", package: "swift-rfc-2045"),
                 .product(name: "RFC 2046", package: "swift-rfc-2046"),
                 .product(name: "RFC 2183", package: "swift-rfc-2183"),
                 .product(name: "RFC 5322", package: "swift-rfc-5322"),
+                .product(name: "Binary", package: "swift-binary"),
             ]
         ),
     ],

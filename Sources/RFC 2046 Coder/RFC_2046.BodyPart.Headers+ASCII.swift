@@ -1,15 +1,13 @@
 public import ASCII
-public import ASCII_Serializer
-public import Binary_Serializable
+public import Binary
 public import Byte
-public import Parseable_ASCII
 public import RFC_2046
-import Byte_Standard_Library_Integration
+public import RFC_5322
+import Byte
 import RFC_2045
 import RFC_2045_Coder
 import RFC_2183
 import RFC_2183_Coder
-import RFC_5322
 
 extension RFC_2046.BodyPart.Headers: @retroactive ASCII.Serializable {
 
@@ -31,7 +29,7 @@ extension RFC_2046.BodyPart.Headers: @retroactive ASCII.Serializable {
 
         if let contentTransferEncoding = headers.contentTransferEncoding {
             Scan.append("Content-Transfer-Encoding: ", into: &buffer)
-            Scan.append(contentTransferEncoding.rawValue, into: &buffer)
+            RFC_2045.ContentTransferEncoding.serialize(contentTransferEncoding, into: &buffer)
             Scan.append("\r\n", into: &buffer)
         }
 
@@ -64,7 +62,7 @@ extension RFC_2046.BodyPart.Headers: @retroactive Binary.Serializable {
 
         if let contentTransferEncoding = headers.contentTransferEncoding {
             Scan.append("Content-Transfer-Encoding: ", into: &buffer)
-            Scan.append(contentTransferEncoding.rawValue, into: &buffer)
+            RFC_2045.ContentTransferEncoding.serialize(contentTransferEncoding, into: &buffer)
             Scan.append("\r\n", into: &buffer)
         }
 
@@ -183,7 +181,11 @@ extension RFC_2046.BodyPart.Headers {
                 }
 
             case .contentTransferEncoding:
-                return contentTransferEncoding.map(\.rawValue)
+                return contentTransferEncoding.map { value in
+                    var bytes: [Byte] = []
+                    RFC_2045.ContentTransferEncoding.serialize(value, into: &bytes)
+                    return String(decoding: bytes, as: UTF8.self)
+                }
 
             default:
                 return custom[headerName]
