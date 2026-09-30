@@ -43,5 +43,3 @@ extension RFC_2046.Multipart.Subtype {
 
     public static var coder: Coder<ArraySlice<Byte>, [Byte]> { .init() }
 }
-
-extension RFC_2046.Multipart.Subtype: Coder.Codable {}

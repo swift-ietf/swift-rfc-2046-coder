@@ -41,5 +41,3 @@ extension RFC_2046.BodyPart.Headers {
 
     public static var coder: Coder<ArraySlice<Byte>, [Byte]> { .init() }
 }
-
-extension RFC_2046.BodyPart.Headers: Coder.Codable {}
