@@ -2,11 +2,10 @@ public import ASCII
 public import Binary
 public import Byte
 public import RFC_2046
-import Byte
 
 extension RFC_2046.Multipart.Subtype: @retroactive ASCII.Parseable {
 
-    public init<Bytes: Swift.Collection>(ascii bytes: Bytes) throws(Error)
+    public init<Bytes: Swift::Collection>(ascii bytes: Bytes) throws(Error)
     where Bytes.Element == Byte {
         try self.init(String(decoding: bytes, as: UTF8.self))
     }

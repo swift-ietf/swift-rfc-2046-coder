@@ -3,7 +3,6 @@ public import Binary
 public import Byte
 public import RFC_2046
 public import RFC_5322
-import Byte
 import RFC_2045
 import RFC_2045_Coder
 import RFC_2183
@@ -77,7 +76,7 @@ extension RFC_2046.BodyPart.Headers: @retroactive Binary.Serializable {
 
 extension RFC_2046.BodyPart.Headers: @retroactive ASCII.Parseable {
 
-    public init<Bytes: Swift.Collection>(ascii bytes: Bytes) throws(Error)
+    public init<Bytes: Swift::Collection>(ascii bytes: Bytes) throws(Error)
     where Bytes.Element == Byte {
         var contentDisposition: RFC_2183.ContentDisposition?
         var contentType: RFC_2045.ContentType?

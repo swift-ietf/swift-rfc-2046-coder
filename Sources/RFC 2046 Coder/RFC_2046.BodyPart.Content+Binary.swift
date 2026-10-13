@@ -2,7 +2,6 @@ public import Binary
 public import Byte
 public import RFC_2046
 import ASCII
-import Byte
 import RFC_2045
 import RFC_4648
 

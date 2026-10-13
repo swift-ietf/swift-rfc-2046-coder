@@ -2,7 +2,6 @@ public import Binary
 public import Byte
 public import RFC_2046
 import ASCII
-import Byte
 import RFC_2045
 import RFC_2045_Coder
 
@@ -119,7 +118,7 @@ extension RFC_2046.Multipart {
 
 extension RFC_2046.Multipart {
 
-    public init<Bytes: Swift.Collection>(
+    public init<Bytes: Swift::Collection>(
         binary input: Bytes,
         boundary: RFC_2046.Boundary,
         subtype: RFC_2046.Multipart.Subtype = .mixed

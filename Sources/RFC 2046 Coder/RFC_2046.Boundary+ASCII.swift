@@ -2,11 +2,10 @@ public import ASCII
 public import Binary
 public import Byte
 public import RFC_2046
-import Byte
 
 extension RFC_2046.Boundary: @retroactive ASCII.Parseable {
 
-    public init<Bytes: Swift.Collection>(ascii bytes: Bytes) throws(Error)
+    public init<Bytes: Swift::Collection>(ascii bytes: Bytes) throws(Error)
     where Bytes.Element == Byte {
         for byte in bytes {
             guard byte.bitPattern < 0x80 else {

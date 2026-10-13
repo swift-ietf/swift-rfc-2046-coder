@@ -2,7 +2,6 @@ public import Binary
 public import Byte
 public import RFC_2046
 import ASCII
-import Byte
 import RFC_2045
 import RFC_2045_Coder
 
@@ -36,7 +35,7 @@ extension [Byte] {
 
 extension RFC_2046.BodyPart {
 
-    public init<Bytes: Swift.Collection>(binary bytes: Bytes) throws(Error)
+    public init<Bytes: Swift::Collection>(binary bytes: Bytes) throws(Error)
     where Bytes.Element == Byte {
         let byteArray = [Byte](bytes)
 
