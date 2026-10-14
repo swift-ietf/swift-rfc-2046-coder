@@ -123,15 +123,31 @@ extension RFC_2046.Multipart {
         boundary: RFC_2046.Boundary,
         subtype: RFC_2046.Multipart.Subtype = .mixed
     ) throws(Error) where Bytes.Element == Byte {
-        let bytes = [Byte](input)
+        let regions = Self.regions([Byte](input), boundary: [Byte](boundary))
+        var parts: [RFC_2046.BodyPart] = []
+        for region in regions.parts {
+            parts.append(try Self.bodyPart(fromRegion: region))
+        }
+        try self.init(
+            subtype: subtype,
+            parts: parts,
+            boundary: boundary,
+            preamble: regions.preamble.map { String(decoding: $0, as: UTF8.self) },
+            epilogue: regions.epilogue.map { String(decoding: $0, as: UTF8.self) }
+        )
+    }
 
+    static func regions(
+        _ bytes: [Byte],
+        boundary: [Byte]
+    ) -> (preamble: [Byte]?, parts: [[Byte]], epilogue: [Byte]?) {
         var delimiter: [Byte] = [Byte](utf8: "--")
-        delimiter.append(contentsOf: [Byte](boundary))
+        delimiter.append(contentsOf: boundary)
 
         var finalDelimiter: [Byte] = delimiter
         finalDelimiter.append(contentsOf: [Byte](utf8: "--"))
 
-        var parts: [RFC_2046.BodyPart] = []
+        var parts: [[Byte]] = []
         var preambleBytes: [Byte]?
         var epilogueBytes: [Byte]?
 
@@ -172,7 +188,7 @@ extension RFC_2046.Multipart {
                     preambleBytes = region.isEmpty ? nil : region
                     sawFirstDelimiter = true
                 } else if inPart {
-                    parts.append(try Self.bodyPart(fromRegion: region))
+                    parts.append(region)
                 }
                 if isFinal {
                     inPart = false
@@ -189,8 +205,7 @@ extension RFC_2046.Multipart {
         }
 
         if inPart {
-            let region = [Byte](bytes[regionStart..<previousContentEnd])
-            parts.append(try Self.bodyPart(fromRegion: region))
+            parts.append([Byte](bytes[regionStart..<previousContentEnd]))
         }
 
         if let start = epilogueStart, start < bytes.endIndex {
@@ -205,12 +220,6 @@ extension RFC_2046.Multipart {
             epilogueBytes = region.isEmpty ? nil : region
         }
 
-        try self.init(
-            subtype: subtype,
-            parts: parts,
-            boundary: boundary,
-            preamble: preambleBytes.map { String(decoding: $0, as: UTF8.self) },
-            epilogue: epilogueBytes.map { String(decoding: $0, as: UTF8.self) }
-        )
+        return (preambleBytes, parts, epilogueBytes)
     }
 }
