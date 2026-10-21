@@ -1,9 +1,9 @@
+import Binary
 public import Byte
 public import Coder
 public import Cursor
-public import RFC_2046
-import Binary
 import Parser
+public import RFC_2046
 import Serializer
 
 extension RFC_2046.Multipart {
@@ -12,7 +12,6 @@ extension RFC_2046.Multipart {
         Input: Cursor.`Protocol`<Byte, Never>,
         Buffer: RangeReplaceableCollection<Byte>
     >: Coding {
-
 
         public typealias Output = RFC_2046.Multipart
 

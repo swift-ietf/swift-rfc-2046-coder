@@ -1,9 +1,9 @@
+import ASCII
 public import Binary
 public import Byte
-public import RFC_2046
-import ASCII
 import RFC_2045
 import RFC_2045_Coder
+public import RFC_2046
 
 extension RFC_2046.Multipart: @retroactive Binary.Serializable {
 

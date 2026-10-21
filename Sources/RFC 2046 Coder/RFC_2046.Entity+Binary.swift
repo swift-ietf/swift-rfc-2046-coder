@@ -1,7 +1,7 @@
-public import Byte
-public import RFC_2046
 import ASCII
+public import Byte
 import RFC_2045
+public import RFC_2046
 
 extension RFC_2046.Entity {
 

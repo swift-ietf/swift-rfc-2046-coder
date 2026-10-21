@@ -1,12 +1,12 @@
 public import ASCII
 public import Binary
 public import Byte
-public import RFC_2046
-public import RFC_5322
 import RFC_2045
 import RFC_2045_Coder
+public import RFC_2046
 import RFC_2183
 import RFC_2183_Coder
+public import RFC_5322
 
 extension RFC_2046.BodyPart.Headers: @retroactive ASCII.Serializable {
 
